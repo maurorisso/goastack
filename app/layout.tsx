@@ -1,10 +1,12 @@
-import { Geist } from "next/font/google";
+import { Inter } from "next/font/google";
+import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
 import { EnvCheck } from "@/components/env-check";
-import "./globals.css";
 import Header from "@/components/shared/header";
 import Footer from "@/components/shared/footer";
+
+const inter = Inter({ subsets: ["latin"] });
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -16,11 +18,6 @@ export const metadata = {
   description: "The fastest way to build apps with Next.js and Supabase",
 };
 
-const geist = Geist({
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export default function RootLayout({
   children,
 }: {
@@ -28,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={geist.className}>
+      <body className={inter.className}>
         <Header />
         <ThemeProvider
           attribute="class"
@@ -36,10 +33,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <EnvCheck>
-            <main className="flex-grow ">{children}</main>
-            <Toaster />
-          </EnvCheck>
+          <EnvCheck />
+          <main className="flex-grow ">{children}</main>
+          <Toaster />
         </ThemeProvider>
         <Footer />
       </body>

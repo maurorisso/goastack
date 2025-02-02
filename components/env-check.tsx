@@ -1,73 +1,55 @@
 "use client";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertTriangle, FileInput } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Terminal } from "lucide-react";
 
-export function EnvCheck({ children }: { children: React.ReactNode }) {
-  const [isUsingEnvExample, setIsUsingEnvExample] = useState(false);
+export function EnvCheck() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  useEffect(() => {
-    // Check if we're using .env.example values (they will have placeholders)
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const isExample =
-      !supabaseUrl ||
-      supabaseUrl.includes("[your-project-ref]") ||
-      supabaseUrl === "your-project-url";
+  const isValidUrl = (url: string) => {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  };
 
-    setIsUsingEnvExample(isExample);
-  }, []);
-
-  if (isUsingEnvExample) {
+  if (!supabaseUrl || !supabaseAnonKey || !isValidUrl(supabaseUrl)) {
     return (
-      <div className="container max-w-5xl py-12">
-        <Alert variant="destructive">
-          <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>Environment Setup Required</AlertTitle>
-          <AlertDescription>
-            <div className="mt-2 space-y-4">
-              <div className="flex items-start gap-2">
-                <FileInput className="h-5 w-5 mt-0.5" />
-                <div>
-                  <p className="font-medium">
-                    You are using the example environment file.
-                  </p>
-                  <p className="text-sm mt-1">Please follow these steps:</p>
-                </div>
-              </div>
-
-              <div className="pl-7 space-y-3">
-                <div>
-                  <p className="text-sm font-medium">
-                    1. Rename the environment file:
-                  </p>
-                  <code className="bg-background/30 px-2 py-1 rounded-md text-sm mt-1 block">
-                    mv .env.example .env.local
-                  </code>
-                </div>
-
-                <div>
-                  <p className="text-sm font-medium">
-                    2. Update the variables in .env.local with your Supabase
-                    project values:
-                  </p>
-                  <a
-                    href="https://supabase.com/dashboard/project/_/settings/api"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline text-sm inline-flex items-center gap-1 mt-1"
-                  >
-                    Find your project values here
-                    <span className="text-xs">↗</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </AlertDescription>
-        </Alert>
-      </div>
+      <Alert variant="destructive">
+        <Terminal className="h-4 w-4" />
+        <AlertTitle>Environment Configuration Required</AlertTitle>
+        <AlertDescription>
+          <div className="mt-2">
+            <p>Please configure your Supabase environment variables:</p>
+            <ol className="list-decimal ml-4 mt-2">
+              <li>
+                Copy <code>.env.example</code> to <code>.env</code>
+              </li>
+              <li>
+                Create a Supabase project at{" "}
+                <a
+                  href="https://app.supabase.com"
+                  className="underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  https://app.supabase.com
+                </a>
+              </li>
+              <li>
+                Update the values in <code>.env</code> with your project
+                credentials from the Supabase dashboard
+              </li>
+              <li>Restart your Next.js development server</li>
+            </ol>
+          </div>
+        </AlertDescription>
+      </Alert>
     );
   }
 
-  return children;
+  return null;
 }
