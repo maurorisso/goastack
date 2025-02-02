@@ -1,5 +1,7 @@
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "@/components/ui/toaster";
+import { EnvCheck } from "@/components/env-check";
 import "./globals.css";
 import Header from "@/components/shared/header";
 import Footer from "@/components/shared/footer";
@@ -14,19 +16,19 @@ export const metadata = {
   description: "The fastest way to build apps with Next.js and Supabase",
 };
 
-const geistSans = Geist({
-  display: "swap",
+const geist = Geist({
   subsets: ["latin"],
+  display: "swap",
 });
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className={geistSans.className} suppressHydrationWarning>
-      <body className="bg-background text-foreground min-h-screen flex flex-col">
+    <html lang="en" suppressHydrationWarning>
+      <body className={geist.className}>
         <Header />
         <ThemeProvider
           attribute="class"
@@ -34,7 +36,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="flex-grow ">{children}</main>
+          <EnvCheck>
+            <main className="flex-grow ">{children}</main>
+            <Toaster />
+          </EnvCheck>
         </ThemeProvider>
         <Footer />
       </body>
