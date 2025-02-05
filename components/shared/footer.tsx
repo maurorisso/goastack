@@ -17,7 +17,7 @@ const Footer = () => {
         </div>
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com/yourusername/goa-stack"
+            href="https://github.com/maurorisso/goastack"
             target="_blank"
             rel="noreferrer"
             className="text-sm text-muted-foreground hover:underline"
@@ -28,7 +28,7 @@ const Footer = () => {
             href="/docs"
             className="text-sm text-muted-foreground hover:underline"
           >
-            Documentation
+            Docs
           </a>
         </div>
       </div>

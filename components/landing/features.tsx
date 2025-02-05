@@ -30,7 +30,7 @@ export default function Features() {
     <section id="features">
       <div className="container">
         <h2 className="text-3xl font-bold text-center mb-12">
-          Why Choose Goa Stack?
+          Built-in Functionality
         </h2>
         <div className="grid gap-6 sm:grid-cols-2">
           {features.map((feature) => (
