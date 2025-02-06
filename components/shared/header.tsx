@@ -14,17 +14,6 @@ export type NavigationItem = {
 
 export type NavigationItems = NavigationItem[];
 
-const navigationItems: NavigationItems = [
-  {
-    title: "Home",
-    href: "/",
-  },
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-  },
-];
-
 export default async function Header() {
   const supabase = await createClient();
 
@@ -71,29 +60,6 @@ export default async function Header() {
         </div>
 
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          {/* Mobile Navigation */}
-          <Sheet>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" className="-ml-2 h-9 w-9">
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="pr-0">
-              <nav className="flex flex-col space-y-3">
-                {navigationItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
-
           {/* Auth Section */}
           <div className="flex items-center">
             {user ? (

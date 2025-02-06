@@ -78,8 +78,8 @@ export default function DocsPage() {
   };
 
   return (
-    <div className="py-12 bg-background">
-      <div className="container max-w-5xl">
+    <div className="py-6 md:py-12 bg-background">
+      <div className="container px-4 md:px-6 max-w-5xl pb-20 md:pb-12">
         <SetupGuide
           steps={setupSteps}
           completedSteps={completedSteps}

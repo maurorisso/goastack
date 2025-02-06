@@ -22,8 +22,10 @@ export function SetupGuide({
 }: SetupGuideProps) {
   return (
     <div id="setup" className="scroll-mt-12">
-      <h1 className="text-3xl font-bold mb-8">Project Setup</h1>
-      <div className="space-y-8">
+      <h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">
+        Project Setup
+      </h1>
+      <div className="space-y-6 md:space-y-8">
         <section>
           <div className="space-y-2">
             {steps.map((step, index) => (
