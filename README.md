@@ -1,6 +1,6 @@
 # GoaStack
 
-A modern full-stack web development template optimized for scalability, maintainability, and developer experience.
+A modern full-stack web development template optimized for scalability, maintainability, and developer experience. Optimized for Cursor IDE, as it includes a **.cursorrules** file to enhance AI-powered suggestions.
 
 ## Tech Stack
 
